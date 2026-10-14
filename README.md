@@ -17,8 +17,9 @@
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-> 🟡 **Sprint atual:** Lab01S01 — Planejamento e prototipação.
-
+> 🟡 **Sprint atual:** Lab01S01 — Planejamento e prototipação; produção do esqueleto das principais telas.
+> 🔴 **Sprint futura:** Lab01S02 — Implementação das funcionalidades principais.
+> 🔴 **Sprint futura:** Lab01S03 — Hospedagem, conclusão e correções.
 ---
 
 ## 📚 Índice
@@ -286,7 +287,7 @@ automática a cada atualização enviada para a branch principal do repositório
 
 | Nome | GitHub | LinkedIn | E-mail |
 | :--- | :--- | :--- | :--- |
-| **Gabriel Hermont** | [@gbhermont](https://github.com/gbhermont) | `<seu LinkedIn>` | `<seu e-mail>` |
+| **Gabriel Hermont** | [@gbhermont](https://github.com/gbhermont) | [Gabriel Hermont](https://www.linkedin.com/in/gabriel-hermont-19a1a73b5) | gabrielsjh2007@gmail.com |
 
 ---
 
