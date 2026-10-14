@@ -1,5 +1,6 @@
 import Navbar from "./components/layout/Navbar.jsx";
 import Hero from "./components/sections/Hero.jsx";
+import About from "./components/sections/About.jsx";
 
 /**
  * Componente raiz do portfólio.
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <About />
       </main>
     </>
   );
