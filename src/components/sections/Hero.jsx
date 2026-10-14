@@ -4,16 +4,10 @@ import styles from "./Hero.module.css";
  * Cena de abertura (página inicial / hero).
  * Esqueleto estrutural baseado no protótipo de alta fidelidade.
  * Conteúdo e dados reais serão movidos para src/data e i18n depois.
+ *
+ * O menu lateral de cenas foi movido para o layout (SceneIndex), para
+ * acompanhar todas as seções.
  */
-const SCENES = [
-  { num: "01", label: "Abertura", active: true },
-  { num: "02", label: "Sobre mim", active: false },
-  { num: "03", label: "Tecnologias", active: false },
-  { num: "04", label: "Em cartaz", active: false },
-  { num: "05", label: "Experiência", active: false },
-  { num: "06", label: "Contato", active: false },
-];
-
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/gbhermont" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/gabriel-hermont-19a1a73b5" },
@@ -24,22 +18,6 @@ const SOCIALS = [
 function Hero() {
   return (
     <section id="abertura" className={styles.hero}>
-      {/* Menu lateral de cenas (scroll spy — ainda estático nesta fase) */}
-      <aside className={styles.sceneIndex} aria-label="Índice de cenas">
-        <span className={styles.sceneIndexLabel}>CENAS</span>
-        {SCENES.map((scene) => (
-          <span
-            key={scene.num}
-            className={`${styles.sceneItem} ${
-              scene.active ? styles.sceneItemActive : ""
-            }`}
-          >
-            <span className={styles.sceneNum}>{scene.num}</span>
-            {scene.label}
-          </span>
-        ))}
-      </aside>
-
       {/* Conteúdo principal */}
       <div className={styles.content}>
         <p className={styles.eyebrow}>ENGENHARIA DE SOFTWARE · EM FORMAÇÃO</p>
