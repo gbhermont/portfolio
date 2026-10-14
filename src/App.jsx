@@ -3,6 +3,7 @@ import Hero from "./components/sections/Hero.jsx";
 import About from "./components/sections/About.jsx";
 import Skills from "./components/sections/Skills.jsx";
 import Projects from "./components/sections/Projects.jsx";
+import Experience from "./components/sections/Experience.jsx";
 
 /**
  * Componente raiz do portfólio.
@@ -18,6 +19,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <Experience />
       </main>
     </>
   );

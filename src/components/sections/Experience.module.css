@@ -1,0 +1,105 @@
+.experience {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+  display: grid;
+  grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Coluna esquerda: cabeçalho da cena (fixa durante a rolagem) */
+.header {
+  grid-column: 1;
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-lg));
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sceneLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--text-primary);
+}
+
+.intro {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 36ch;
+}
+
+/* Coluna direita: timeline */
+.timeline {
+  grid-column: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  /* linha vertical da timeline */
+  padding-left: var(--space-md);
+  border-left: 1px solid var(--border);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Marcador dourado na linha */
+.item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-md) - 5px);
+  top: 0.4rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.role {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.institution {
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: var(--space-xs);
+}
+
+@media (max-width: 820px) {
+  .experience {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .header {
+    position: static;
+    grid-column: 1;
+  }
+  .timeline {
+    grid-column: 1;
+  }
+}
