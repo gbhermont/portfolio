@@ -1,0 +1,87 @@
+.skills {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+  display: grid;
+  grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Coluna esquerda: cabeçalho da cena (fixa durante a rolagem) */
+.header {
+  grid-column: 1;
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-lg));
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sceneLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--text-primary);
+}
+
+.intro {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 36ch;
+}
+
+/* Coluna direita: grade de categorias */
+.content {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+  align-content: start;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-sm);
+}
+
+.categoryName {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.item {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 820px) {
+  .skills {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .header {
+    position: static;
+    grid-column: 1;
+  }
+  .content {
+    grid-column: 1;
+  }
+}
