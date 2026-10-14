@@ -1,0 +1,48 @@
+/* ============================================================
+   Design Tokens — identidade visual "cinema" (preto + dourado)
+   Definidos como variáveis CSS para facilitar manutenção e temas.
+   O tema escuro é o padrão; o claro será adicionado depois.
+   ============================================================ */
+
+:root {
+  /* Paleta base */
+  --color-black: #0b0b0d;
+  --color-ink: #111114;
+  --color-surface: #16161a;
+  --color-off-white: #f3efe6;
+  --color-gold: #c9a24b;
+  --color-gold-soft: #e4c87d;
+
+  /* Tons de texto */
+  --text-primary: var(--color-off-white);
+  --text-secondary: #a9a6a0;
+  --text-muted: #6f6c66;
+
+  /* Fundos */
+  --bg: var(--color-black);
+  --bg-elevated: var(--color-surface);
+
+  /* Acento */
+  --accent: var(--color-gold);
+  --accent-strong: var(--color-gold-soft);
+
+  /* Bordas e linhas */
+  --border: rgba(201, 162, 75, 0.18);
+  --border-subtle: rgba(243, 239, 230, 0.08);
+
+  /* Tipografia */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  /* Espaçamentos */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+
+  /* Layout */
+  --nav-height: 72px;
+  --content-max: 1200px;
+}

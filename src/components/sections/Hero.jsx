@@ -1,0 +1,101 @@
+import styles from "./Hero.module.css";
+
+/**
+ * Cena de abertura (página inicial / hero).
+ * Esqueleto estrutural baseado no protótipo de alta fidelidade.
+ * Conteúdo e dados reais serão movidos para src/data e i18n depois.
+ */
+const SCENES = [
+  { num: "01", label: "Abertura", active: true },
+  { num: "02", label: "Sobre mim", active: false },
+  { num: "03", label: "Tecnologias", active: false },
+  { num: "04", label: "Em cartaz", active: false },
+  { num: "05", label: "Experiência", active: false },
+  { num: "06", label: "Contato", active: false },
+];
+
+const SOCIALS = [
+  { label: "GitHub", href: "https://github.com/gbhermont" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/gabriel-hermont-19a1a73b5" },
+  { label: "E-mail", href: "#" },
+  { label: "WhatsApp", href: "#" },
+];
+
+function Hero() {
+  return (
+    <section id="abertura" className={styles.hero}>
+      {/* Menu lateral de cenas (scroll spy — ainda estático nesta fase) */}
+      <aside className={styles.sceneIndex} aria-label="Índice de cenas">
+        <span className={styles.sceneIndexLabel}>CENAS</span>
+        {SCENES.map((scene) => (
+          <span
+            key={scene.num}
+            className={`${styles.sceneItem} ${
+              scene.active ? styles.sceneItemActive : ""
+            }`}
+          >
+            <span className={styles.sceneNum}>{scene.num}</span>
+            {scene.label}
+          </span>
+        ))}
+      </aside>
+
+      {/* Conteúdo principal */}
+      <div className={styles.content}>
+        <p className={styles.eyebrow}>ENGENHARIA DE SOFTWARE · EM FORMAÇÃO</p>
+
+        <h1 className={styles.name}>
+          <span className={styles.nameFirst}>Gabriel</span>
+          <span className={styles.nameLast}>Hermont</span>
+        </h1>
+
+        <p className={styles.logline}>Boas histórias merecem bom código.</p>
+
+        <p className={styles.description}>
+          Transformo curiosidade em software — com atenção às pessoas, aos
+          detalhes e ao que vem a seguir.
+        </p>
+
+        <p className={styles.availability}>
+          <span className={styles.dot} aria-hidden="true" />
+          DISPONÍVEL PARA OPORTUNIDADES
+        </p>
+
+        <div className={styles.actions}>
+          <a href="#projetos" className={styles.cta}>
+            Explorar projetos <span aria-hidden="true">↗</span>
+          </a>
+          <span className={styles.ctaNote}>
+            Uma ideia. Um commit. Uma nova cena.
+          </span>
+        </div>
+      </div>
+
+      {/* Visual cinematográfico (placeholder da imagem do protótipo) */}
+      <div className={styles.visual} aria-hidden="true">
+        <span className={styles.visualTag}>INT. FUTURO — DIA</span>
+        <span className={styles.visualTag}>VOL. 01 / 2026</span>
+      </div>
+
+      {/* Rodapé do hero: redes sociais + pista de rolagem */}
+      <div className={styles.socialBar}>
+        <nav className={styles.socials} aria-label="Redes sociais">
+          {SOCIALS.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              className={styles.social}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {social.label} <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </nav>
+        <span className={styles.scrollHint}>role para a próxima cena ⌄</span>
+      </div>
+    </section>
+  );
+}
+
+export default Hero;

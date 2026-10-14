@@ -163,7 +163,6 @@ gbhermont-portfolio/
 │   ├── assets/                 # 🖼️ Imagens e recursos importados no código
 │   ├── components/             # 🧱 Componentes reutilizáveis
 │   │   ├── layout/             #    Navbar, Footer, índice lateral (scroll spy)
-│   │   ├── editorial/          #    Rótulos de "cena", divisores (film strip)
 │   │   └── ui/                 #    Botões, toggle de tema, seletor de idioma
 │   ├── sections/               # 🎬 Seções da landing page (uma por "cena")
 │   │   ├── Hero.jsx            #    Abertura (hero)
@@ -221,9 +220,8 @@ npm install
 npm run dev
 ```
 
-Após executar `npm run dev`, o terminal exibirá um endereço local
-(geralmente <http://localhost:5173>). Abra esse endereço no navegador para
-visualizar o portfólio.
+Após executar `npm run dev`, o terminal exibirá um endereço local.
+Abra esse endereço no navegador para visualizar o portfólio.
 
 ### Scripts disponíveis
 
