@@ -5,6 +5,7 @@ import Skills from "./components/sections/Skills.jsx";
 import Projects from "./components/sections/Projects.jsx";
 import Experience from "./components/sections/Experience.jsx";
 import Contact from "./components/sections/Contact.jsx";
+import Footer from "./components/layout/Footer.jsx";
 
 /**
  * Componente raiz do portfólio.
@@ -23,6 +24,7 @@ function App() {
         <Experience />
         <Contact />
       </main>
+      <Footer />
     </>
   );
 }
