@@ -50,13 +50,42 @@
 }
 
 .link {
+  position: relative;
   font-size: 0.9rem;
   color: var(--text-secondary);
   transition: color 0.2s ease;
+  padding-bottom: 2px;
+}
+
+/* Underline dourado que cresce (hover e cena ativa) */
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
 .link:hover {
   color: var(--accent);
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Cena ativa: link dourado com underline fixo */
+.linkActive {
+  color: var(--accent);
+}
+
+.linkActive::after {
+  transform: scaleX(1);
 }
 
 .controls {
