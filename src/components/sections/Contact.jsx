@@ -1,12 +1,14 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.css";
 
 /**
  * Cena 06 — Contato ("Vamos escrever a próxima cena?").
- * Esqueleto: canais de contato à esquerda e formulário à direita.
+ * Canais de contato à esquerda e formulário funcional à direita.
  *
- * NOTA: o envio real por e-mail (EmailJS) e as validações serão implementados
- * na próxima etapa (Lab01S02). Por enquanto o formulário apenas evita o
- * recarregamento da página ao enviar.
+ * O envio usa o EmailJS (sem back-end). As chaves ficam em variáveis de
+ * ambiente (.env, fora do versionamento). A validação usa React Hook Form.
  */
 const CHANNELS = [
   {
@@ -26,10 +28,35 @@ const CHANNELS = [
   },
 ];
 
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 function Contact() {
-  const handleSubmit = (event) => {
-    // Placeholder: o envio real (EmailJS) será adicionado depois.
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  // "idle" | "success" | "error"
+  const [status, setStatus] = useState("idle");
+
+  const onSubmit = async (data) => {
+    setStatus("idle");
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        { nome: data.nome, email: data.email, mensagem: data.mensagem },
+        { publicKey: PUBLIC_KEY }
+      );
+      setStatus("success");
+      reset();
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -67,7 +94,7 @@ function Contact() {
       </div>
 
       {/* Coluna direita: formulário */}
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
         <h3 className={styles.formTitle}>Deixe sua mensagem.</h3>
 
         <div className={styles.row}>
@@ -77,11 +104,18 @@ function Contact() {
             </label>
             <input
               id="nome"
-              name="nome"
               type="text"
               className={styles.input}
               placeholder="Como você se chama?"
+              aria-invalid={errors.nome ? "true" : "false"}
+              {...register("nome", {
+                required: "Informe seu nome.",
+                minLength: { value: 2, message: "Nome muito curto." },
+              })}
             />
+            {errors.nome && (
+              <span className={styles.error}>{errors.nome.message}</span>
+            )}
           </div>
           <div className={styles.field}>
             <label className={styles.label} htmlFor="email">
@@ -89,11 +123,21 @@ function Contact() {
             </label>
             <input
               id="email"
-              name="email"
               type="email"
               className={styles.input}
               placeholder="voce@exemplo.com"
+              aria-invalid={errors.email ? "true" : "false"}
+              {...register("email", {
+                required: "Informe seu e-mail.",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "E-mail inválido.",
+                },
+              })}
             />
+            {errors.email && (
+              <span className={styles.error}>{errors.email.message}</span>
+            )}
           </div>
         </div>
 
@@ -103,16 +147,37 @@ function Contact() {
           </label>
           <textarea
             id="mensagem"
-            name="mensagem"
             className={styles.textarea}
             placeholder="Conte um pouco sobre a sua ideia ou oportunidade..."
+            aria-invalid={errors.mensagem ? "true" : "false"}
+            {...register("mensagem", {
+              required: "Escreva uma mensagem.",
+              minLength: { value: 10, message: "Mensagem muito curta." },
+            })}
           />
+          {errors.mensagem && (
+            <span className={styles.error}>{errors.mensagem.message}</span>
+          )}
         </div>
 
-        <button type="submit" className={styles.submit}>
-          Enviar mensagem <span aria-hidden="true">↗</span>
+        <button type="submit" className={styles.submit} disabled={isSubmitting}>
+          {isSubmitting ? "Enviando..." : "Enviar mensagem"}{" "}
+          <span aria-hidden="true">↗</span>
         </button>
-        <span className={styles.note}>Todos os campos são obrigatórios.</span>
+
+        {status === "success" && (
+          <span className={styles.success}>
+            Mensagem enviada — nos vemos na próxima cena.
+          </span>
+        )}
+        {status === "error" && (
+          <span className={styles.error}>
+            Algo deu errado no envio. Tente novamente ou use outro canal.
+          </span>
+        )}
+        {status === "idle" && (
+          <span className={styles.note}>Todos os campos são obrigatórios.</span>
+        )}
       </form>
     </section>
   );

@@ -163,6 +163,27 @@
   color: var(--text-muted);
 }
 
+.error {
+  font-size: 0.8rem;
+  color: #e07a5f;
+}
+
+.success {
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+/* Destaca a borda dos campos com erro */
+.input[aria-invalid="true"],
+.textarea[aria-invalid="true"] {
+  border-color: #e07a5f;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (max-width: 820px) {
   .contact {
     grid-template-columns: 1fr;
