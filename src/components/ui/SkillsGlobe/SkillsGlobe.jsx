@@ -148,22 +148,34 @@ export default function SkillsGlobe({ skills, speed = 0.15, color = "#c9a24b" })
       ctx.clearRect(0, 0, width, height);
 
       // Halo atrás da esfera
+      // Cor da grade/halo vem do tema (variável --accent). No tema claro, a
+      // grade precisa de mais opacidade para ter contraste sobre o fundo claro.
+      const isLight =
+        document.documentElement.getAttribute("data-theme") === "light";
+      const gridColor =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--accent")
+          .trim() || color;
+      const frontAlpha = isLight ? 0.55 : 0.28;
+      const backAlpha = isLight ? 0.18 : 0.07;
+      const haloAlpha = isLight ? "22" : "14";
+
       const halo = ctx.createRadialGradient(cx, cy, radius * 0.2, cx, cy, radius * 1.25);
-      halo.addColorStop(0, `${color}14`);
-      halo.addColorStop(1, `${color}00`);
+      halo.addColorStop(0, `${gridColor}${haloAlpha}`);
+      halo.addColorStop(1, `${gridColor}00`);
       ctx.fillStyle = halo;
       ctx.beginPath();
       ctx.arc(cx, cy, radius * 1.25, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.lineWidth = 1;
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = gridColor;
       for (const line of GRID) {
         let prev = project(line[0]);
         for (let i = 1; i < line.length; i += 1) {
           const cur = project(line[i]);
           // Frente da esfera mais forte, fundo bem fraco
-          ctx.globalAlpha = (prev.z + cur.z) / 2 > 0 ? 0.28 : 0.07;
+          ctx.globalAlpha = (prev.z + cur.z) / 2 > 0 ? frontAlpha : backAlpha;
           ctx.beginPath();
           ctx.moveTo(prev.x, prev.y);
           ctx.lineTo(cur.x, cur.y);
