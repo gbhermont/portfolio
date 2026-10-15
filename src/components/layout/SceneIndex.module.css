@@ -9,16 +9,25 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  padding-left: var(--space-sm);
 }
 
-/* Trilho da barra de progresso (linha cinza à esquerda do menu) */
+/* Container dos itens: é a área que o trilho de progresso cobre. */
+.scenes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  padding-left: 0.9rem;
+}
+
+/* Trilho da barra de progresso — alinhado ao primeiro e ao último item.
+   O recuo vertical (top/bottom) centraliza o trilho na linha dos marcadores. */
 .track {
   position: absolute;
   left: 0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
+  top: 0.5em;
+  bottom: 0.5em;
+  width: 2px;
   background: var(--border-subtle);
 }
 
@@ -27,14 +36,14 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 1px;
+  width: 2px;
   background: var(--accent);
-  transition: height 0.1s linear;
+  /* A suavização é feita via JS (lerp), por isso não há transition aqui. */
 }
 
 .label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.68rem;
   letter-spacing: 0.2em;
   color: var(--text-muted);
   margin-bottom: var(--space-xs);
@@ -42,7 +51,7 @@
 
 .item {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   color: var(--text-muted);
   display: flex;

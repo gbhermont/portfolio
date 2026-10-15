@@ -16,7 +16,7 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer}>
+    <footer id="creditos" className={styles.footer}>
       <div className={styles.inner}>
         <span className={styles.credits}>CRÉDITOS FINAIS</span>
         <span className={styles.name}>Gabriel Hermont</span>
