@@ -33,9 +33,7 @@ export const CATEGORIES = [
   "Linguagens",
   "Frameworks",
   "Cloud & Infra",
-  "IA no dev",
   "Ferramentas",
-  "Design",
 ];
 
 const SKILLS = [
@@ -56,22 +54,18 @@ const SKILLS = [
   { name: "AWS", icon: FaAws, color: "#FF9900", category: "Cloud & Infra", link: "https://docs.aws.amazon.com/" },
   { name: "Azure", icon: TbBrandAzure, color: "#0078D4", category: "Cloud & Infra", link: "https://learn.microsoft.com/azure/" },
 
-  // IA no dev
-  { name: "GitHub Copilot", icon: SiGithubcopilot, color: "#8957E5", category: "IA no dev", link: "https://github.com/features/copilot" },
-  { name: "Claude", icon: SiClaude, color: "#D97757", category: "IA no dev", link: "https://www.anthropic.com/claude" },
-  { name: "Gemini", icon: SiGooglegemini, color: "#8E75B2", category: "IA no dev", link: "https://gemini.google.com/" },
-
-  // Ferramentas
+  // Ferramentas (inclui IA no desenvolvimento e design)
   { name: "Git", icon: SiGit, color: "#F05032", category: "Ferramentas", link: "https://git-scm.com/book/pt-br/v2" },
   { name: "GitHub", icon: SiGithub, color: "#E6E6E6", category: "Ferramentas", link: "https://github.com/gbhermont" },
   { name: "VS Code", icon: TbBrandVscode, color: "#007ACC", category: "Ferramentas", link: "https://code.visualstudio.com/docs" },
   { name: "Vite", icon: SiVite, color: "#646CFF", category: "Ferramentas", link: "https://vite.dev/" },
-
-  // Design
-  { name: "Figma", icon: SiFigma, color: "#A259FF", category: "Design", link: "https://help.figma.com/" },
-  { name: "Miro", icon: SiMiro, color: "#FFD02F", category: "Design", link: "https://miro.com/" },
-  { name: "Photoshop", icon: FaImage, color: "#31A8FF", category: "Design", link: "https://www.adobe.com/products/photoshop.html" },
-  { name: "Canva", icon: FaPalette, color: "#00C4CC", category: "Design", link: "https://www.canva.com/" },
+  { name: "GitHub Copilot", icon: SiGithubcopilot, color: "#8957E5", category: "Ferramentas", link: "https://github.com/features/copilot" },
+  { name: "Claude", icon: SiClaude, color: "#D97757", category: "Ferramentas", link: "https://www.anthropic.com/claude" },
+  { name: "Gemini", icon: SiGooglegemini, color: "#8E75B2", category: "Ferramentas", link: "https://gemini.google.com/" },
+  { name: "Figma", icon: SiFigma, color: "#A259FF", category: "Ferramentas", link: "https://help.figma.com/" },
+  { name: "Miro", icon: SiMiro, color: "#FFD02F", category: "Ferramentas", link: "https://miro.com/" },
+  { name: "Photoshop", icon: FaImage, color: "#31A8FF", category: "Ferramentas", link: "https://www.adobe.com/products/photoshop.html" },
+  { name: "Canva", icon: FaPalette, color: "#00C4CC", category: "Ferramentas", link: "https://www.canva.com/" },
 ];
 
 export default SKILLS;

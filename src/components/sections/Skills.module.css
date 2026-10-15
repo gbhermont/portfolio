@@ -36,6 +36,42 @@
   max-width: 36ch;
 }
 
+/* Filtro por categoria */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.filter {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.filter:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.filter:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.filterActive {
+  color: var(--color-black);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
 /* Coluna direita: globo 3D de tecnologias */
 .content {
   grid-column: 2;
