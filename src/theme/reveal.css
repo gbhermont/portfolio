@@ -1,0 +1,37 @@
+/* ============================================================
+   Reveal ao rolar — utilidades globais de animação de entrada.
+   Usadas em conjunto com o hook useRevealOnScroll.
+
+   Uso:
+     <section ref={ref} class="revealGroup [is-shown]">
+       <div class="revealItem" style="--i:0">...</div>
+       <div class="revealItem" style="--i:1">...</div>
+     </section>
+
+   Os itens começam invisíveis e sobem/fade em cascata (stagger) quando o
+   grupo recebe a classe "is-shown" (controlada pelo hook).
+   ============================================================ */
+.revealItem {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.revealGroup.is-shown .revealItem {
+  animation: revealUp 0.6s ease forwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealItem {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

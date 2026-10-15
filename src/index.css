@@ -1,5 +1,6 @@
 /* Estilos globais e reset base */
 @import "./theme/tokens.css";
+@import "./theme/reveal.css";
 
 *,
 *::before,

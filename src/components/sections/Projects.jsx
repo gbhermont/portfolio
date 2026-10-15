@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import styles from "./Projects.module.css";
+import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 /**
  * Cena 04 — Em cartaz (Projetos).
- * Esqueleto com carrossel horizontal: os cards ficam num trilho rolável e as
- * setas avançam/voltam. Esse formato permite adicionar projetos sem esticar a
- * página (escalabilidade). Os projetos abaixo são placeholders; a lista real
- * virá de src/data depois.
+ * Carrossel horizontal: os cards ficam num trilho rolável e as setas
+ * avançam/voltam, permitindo adicionar projetos sem esticar a página.
+ * O cabeçalho e cada card entram em cascata ao aparecer na tela.
+ * Os projetos abaixo são placeholders; a lista real virá de src/data depois.
  */
 const PROJECTS = [
   {
@@ -38,6 +39,7 @@ const PROJECTS = [
 function Projects() {
   // Referência ao trilho, para controlar a rolagem com as setas.
   const trackRef = useRef(null);
+  const { ref, shown } = useRevealOnScroll();
 
   // Rola o trilho na horizontal pela largura de um card + espaçamento.
   const scrollByCard = (direction) => {
@@ -48,8 +50,12 @@ function Projects() {
   };
 
   return (
-    <section id="projetos" className={styles.projects}>
-      <div className={styles.header}>
+    <section
+      id="projetos"
+      ref={ref}
+      className={`${styles.projects} revealGroup ${shown ? "is-shown" : ""}`}
+    >
+      <div className={`${styles.header} revealItem`} style={{ "--i": 0 }}>
         <div className={styles.headerText}>
           <span className={styles.sceneLabel}>SCENE 04 — EM CARTAZ</span>
           <h2 className={styles.title}>Em cartaz.</h2>
@@ -78,10 +84,14 @@ function Projects() {
         </div>
       </div>
 
-      {/* Trilho do carrossel */}
+      {/* Trilho do carrossel — cada card entra em cascata */}
       <div className={styles.track} ref={trackRef}>
-        {PROJECTS.map((project) => (
-          <article key={project.num} className={styles.card}>
+        {PROJECTS.map((project, index) => (
+          <article
+            key={project.num}
+            className={`${styles.card} revealItem`}
+            style={{ "--i": index + 1 }}
+          >
             <div className={styles.poster}>
               <span className={styles.cardNum}>{project.num}</span>
               <span className={styles.cardKind}>{project.kind}</span>

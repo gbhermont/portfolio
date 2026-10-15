@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.css";
+import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 /**
  * Cena 06 — Contato ("Vamos escrever a próxima cena?").
@@ -42,6 +43,7 @@ function Contact() {
 
   // "idle" | "success" | "error"
   const [status, setStatus] = useState("idle");
+  const { ref, shown } = useRevealOnScroll();
 
   const onSubmit = async (data) => {
     setStatus("idle");
@@ -60,9 +62,13 @@ function Contact() {
   };
 
   return (
-    <section id="contato" className={styles.contact}>
+    <section
+      id="contato"
+      ref={ref}
+      className={`${styles.contact} revealGroup ${shown ? "is-shown" : ""}`}
+    >
       {/* Coluna esquerda: título + canais */}
-      <div className={styles.left}>
+      <div className={`${styles.left} revealItem`} style={{ "--i": 0 }}>
         <span className={styles.sceneLabel}>SCENE 06 — CONTATO</span>
         <h2 className={styles.title}>Vamos escrever a próxima cena?</h2>
         <p className={styles.intro}>
@@ -94,7 +100,12 @@ function Contact() {
       </div>
 
       {/* Coluna direita: formulário */}
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form
+        className={`${styles.form} revealItem`}
+        style={{ "--i": 1 }}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <h3 className={styles.formTitle}>Deixe sua mensagem.</h3>
 
         <div className={styles.row}>

@@ -1,10 +1,10 @@
 import styles from "./Experience.module.css";
+import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
 /**
  * Cena 05 — Experiência ("Aprender, na prática").
  * Timeline vertical: cabeçalho fixo (sticky) à esquerda e a lista de
- * experiências à direita. Por mais itens que existam, o cabeçalho permanece
- * ancorado durante a rolagem.
+ * experiências à direita. Cada item entra em cascata ao aparecer na tela.
  */
 const EXPERIENCES = [
   {
@@ -28,10 +28,16 @@ const EXPERIENCES = [
 ];
 
 function Experience() {
+  const { ref, shown } = useRevealOnScroll();
+
   return (
-    <section id="experiencia" className={styles.experience}>
+    <section
+      id="experiencia"
+      ref={ref}
+      className={`${styles.experience} revealGroup ${shown ? "is-shown" : ""}`}
+    >
       {/* Coluna esquerda (fixa durante a rolagem) */}
-      <div className={styles.header}>
+      <div className={`${styles.header} revealItem`} style={{ "--i": 0 }}>
         <span className={styles.sceneLabel}>SCENE 05 — EXPERIÊNCIA</span>
         <h2 className={styles.title}>Aprender, na prática.</h2>
         <p className={styles.intro}>
@@ -39,10 +45,14 @@ function Experience() {
         </p>
       </div>
 
-      {/* Coluna direita (timeline) */}
+      {/* Coluna direita (timeline) — cada item entra em cascata */}
       <div className={styles.timeline}>
-        {EXPERIENCES.map((exp) => (
-          <article key={exp.id} className={styles.item}>
+        {EXPERIENCES.map((exp, index) => (
+          <article
+            key={exp.id}
+            className={`${styles.item} revealItem`}
+            style={{ "--i": index + 1 }}
+          >
             <span className={styles.period}>{exp.period}</span>
             <h3 className={styles.role}>{exp.role}</h3>
             <span className={styles.institution}>{exp.institution}</span>
