@@ -10,9 +10,9 @@ import styles from "./Hero.module.css";
  */
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/gbhermont" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/gabriel-hermont-19a1a73b5" },
-  { label: "E-mail", href: "#" },
-  { label: "WhatsApp", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/gbhermont" },
+  { label: "E-mail", href: "mailto:gabrielsjh2007@gmail.com" },
+  { label: "WhatsApp", href: "https://wa.me/5531992021581" },
 ];
 
 function Hero() {
@@ -32,11 +32,6 @@ function Hero() {
         <p className={styles.description}>
           Transformo curiosidade em software — com atenção às pessoas, aos
           detalhes e ao que vem a seguir.
-        </p>
-
-        <p className={styles.availability}>
-          <span className={styles.dot} aria-hidden="true" />
-          DISPONÍVEL PARA OPORTUNIDADES
         </p>
 
         <div className={styles.actions}>

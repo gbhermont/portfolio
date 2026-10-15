@@ -2,32 +2,28 @@ import styles from "./Experience.module.css";
 
 /**
  * Cena 05 — Experiência ("Aprender, na prática").
- * Esqueleto com timeline vertical: cabeçalho fixo (sticky) à esquerda e a lista
- * de experiências à direita. Por mais itens que existam, o cabeçalho permanece
- * ancorado durante a rolagem. Os itens são placeholders; os dados reais virão
- * de src/data depois.
+ * Timeline vertical: cabeçalho fixo (sticky) à esquerda e a lista de
+ * experiências à direita. Por mais itens que existam, o cabeçalho permanece
+ * ancorado durante a rolagem.
  */
 const EXPERIENCES = [
   {
-    id: "exp-1",
-    period: "MÊS ANO — ATUAL",
-    role: "Cargo ou atividade",
-    institution: "Empresa / Instituição",
-    description: "Descrição curta da experiência (placeholder).",
-  },
-  {
-    id: "exp-2",
-    period: "MÊS ANO — MÊS ANO",
-    role: "Cargo ou atividade",
-    institution: "Empresa / Instituição",
-    description: "Descrição curta da experiência (placeholder).",
-  },
-  {
-    id: "exp-3",
-    period: "MÊS ANO — MÊS ANO",
-    role: "Cargo ou atividade",
-    institution: "Empresa / Instituição",
-    description: "Descrição curta da experiência (placeholder).",
+    id: "techbiz",
+    period: "MAR 2026 — ATUAL",
+    role: "Jovem Aprendiz em Infraestrutura",
+    institution: "TechBiz Forense Digital",
+    description:
+      "Atuação em infraestrutura e cloud (AWS, Microsoft 365, Azure, AD e Entra ID), gestão e controle de inventário de ativos de TI e suporte a software e hardware. Produção de documentação técnica, atendimento ao usuário e trabalho em equipe. Também participo do desenvolvimento de um sistema próprio de CSC e gestão de ativos/empresarial, atuando na correção de bugs (dev) e em testes do sistema.",
+    tags: [
+      "AWS",
+      "Azure",
+      "Microsoft 365",
+      "Gestão de ativos de TI",
+      "Suporte técnico",
+      "Desenvolvimento",
+      "Testes",
+      "Documentação",
+    ],
   },
 ];
 
@@ -51,6 +47,15 @@ function Experience() {
             <h3 className={styles.role}>{exp.role}</h3>
             <span className={styles.institution}>{exp.institution}</span>
             <p className={styles.description}>{exp.description}</p>
+            {exp.tags && (
+              <div className={styles.tags}>
+                {exp.tags.map((tag) => (
+                  <span key={tag} className={styles.tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </article>
         ))}
       </div>

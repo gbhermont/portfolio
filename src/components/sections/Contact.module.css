@@ -33,6 +33,24 @@
   max-width: 36ch;
 }
 
+/* Badge de disponibilidade */
+.availability {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
 /* Lista de canais (e-mail, WhatsApp, LinkedIn) */
 .channels {
   display: flex;

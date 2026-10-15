@@ -9,9 +9,21 @@ import styles from "./Contact.module.css";
  * recarregamento da página ao enviar.
  */
 const CHANNELS = [
-  { kind: "E-MAIL", value: "seu-email@exemplo.com", href: "#" },
-  { kind: "WHATSAPP", value: "+55 (31) 00000-0000", href: "#" },
-  { kind: "LINKEDIN", value: "linkedin.com/in/gabriel-hermont", href: "#" },
+  {
+    kind: "E-MAIL",
+    value: "gabrielsjh2007@gmail.com",
+    href: "mailto:gabrielsjh2007@gmail.com",
+  },
+  {
+    kind: "WHATSAPP",
+    value: "+55 (31) 99202-1581",
+    href: "https://wa.me/5531992021581",
+  },
+  {
+    kind: "LINKEDIN",
+    value: "linkedin.com/in/gbhermont",
+    href: "https://www.linkedin.com/in/gbhermont",
+  },
 ];
 
 function Contact() {
@@ -28,6 +40,11 @@ function Contact() {
         <h2 className={styles.title}>Vamos escrever a próxima cena?</h2>
         <p className={styles.intro}>
           Tem uma oportunidade ou ideia? Fala comigo por um destes canais.
+        </p>
+
+        <p className={styles.availability}>
+          <span className={styles.dot} aria-hidden="true" />
+          DISPONÍVEL PARA OPORTUNIDADES
         </p>
 
         <div className={styles.channels}>

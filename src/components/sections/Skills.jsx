@@ -2,21 +2,34 @@ import styles from "./Skills.module.css";
 
 /**
  * Cena 03 — Tecnologias ("Meu repertório").
- * Esqueleto: cabeçalho fixo (sticky) à esquerda e grade de categorias à direita.
- * As tecnologias abaixo são placeholders; a lista real virá de src/data depois.
+ * Cabeçalho fixo (sticky) à esquerda e grade de categorias à direita.
+ * Tecnologias baseadas nos repositórios reais do GitHub (@gbhermont).
+ * TODO: ajustar conforme seu domínio real de cada tecnologia.
  */
 const CATEGORIES = [
   {
-    name: "FRONT-END",
-    items: ["React", "JavaScript", "HTML", "CSS"],
+    name: "LINGUAGENS",
+    items: ["JavaScript", "Python", "Java"],
   },
   {
-    name: "BACK-END",
-    items: ["Node.js", "Java"],
+    name: "FRAMEWORKS",
+    items: ["React", "Spring Boot", "Bootstrap", "Thymeleaf"],
+  },
+  {
+    name: "CLOUD & INFRA",
+    items: ["AWS", "Azure", "Microsoft 365"],
+  },
+  {
+    name: "IA NO DEV",
+    items: ["GitHub Copilot", "Claude", "Gemini", "Kiro"],
   },
   {
     name: "FERRAMENTAS",
-    items: ["Git", "GitHub", "Vite", "VS Code"],
+    items: ["Git", "GitHub", "VS Code", "IntelliJ IDEA"],
+  },
+  {
+    name: "DESIGN",
+    items: ["Figma", "Miro", "Photoshop", "Canva"],
   },
 ];
 

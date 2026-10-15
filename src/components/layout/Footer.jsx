@@ -7,9 +7,9 @@ import styles from "./Footer.module.css";
  */
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/gbhermont" },
-  { label: "LinkedIn", href: "#" },
-  { label: "E-mail", href: "#" },
-  { label: "WhatsApp", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/gbhermont" },
+  { label: "E-mail", href: "mailto:gabrielsjh2007@gmail.com" },
+  { label: "WhatsApp", href: "https://wa.me/5531992021581" },
 ];
 
 function Footer() {
