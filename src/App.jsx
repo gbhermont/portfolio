@@ -7,6 +7,7 @@ import Projects from "./components/sections/Projects.jsx";
 import Experience from "./components/sections/Experience.jsx";
 import Contact from "./components/sections/Contact.jsx";
 import Footer from "./components/layout/Footer.jsx";
+import IntroOverlay from "./components/ui/IntroOverlay/IntroOverlay.jsx";
 
 /**
  * Componente raiz do portfólio.
@@ -16,6 +17,7 @@ import Footer from "./components/layout/Footer.jsx";
 function App() {
   return (
     <>
+      <IntroOverlay />
       <Navbar />
       <SceneIndex />
       <main>

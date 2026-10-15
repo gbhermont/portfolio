@@ -1,0 +1,69 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-black, #0b0b0d);
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+/* Fade-out da abertura, revelando o hero por trás */
+.leaving {
+  opacity: 0;
+}
+
+.monogram {
+  overflow: visible;
+}
+
+/* Letras "GH" em contorno dourado, com o traço se desenhando */
+.letters {
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-weight: 700;
+  font-size: 54px;
+  letter-spacing: 2px;
+  fill: transparent;
+  stroke: var(--color-gold, #c9a24b);
+  stroke-width: 1.2;
+  /* desenha o contorno */
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation:
+    draw 2s ease forwards,
+    fillin 0.7s ease forwards 2s,
+    glow 1.4s ease-in-out 2s;
+  filter: drop-shadow(0 0 6px rgba(201, 162, 75, 0.35));
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Preenche levemente o interior após o contorno terminar */
+@keyframes fillin {
+  to {
+    fill: var(--color-gold-soft, #e4c87d);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px rgba(201, 162, 75, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(201, 162, 75, 0.65));
+  }
+}
+
+/* Segurança extra: se o usuário pedir menos movimento, nada anima. */
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    display: none;
+  }
+}
