@@ -1,13 +1,11 @@
 import styles from "./Hero.module.css";
 import HeroStage from "../ui/HeroStage/HeroStage";
+import useTypewriter from "../../hooks/useTypewriter";
 
 /**
  * Cena de abertura (página inicial / hero).
- * Esqueleto estrutural baseado no protótipo de alta fidelidade.
- * Conteúdo e dados reais serão movidos para src/data e i18n depois.
- *
- * O menu lateral de cenas foi movido para o layout (SceneIndex), para
- * acompanhar todas as seções.
+ * O menu lateral de cenas vive no layout (SceneIndex).
+ * A logline usa efeito "máquina de escrever", alternando entre frases.
  */
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/gbhermont" },
@@ -16,7 +14,15 @@ const SOCIALS = [
   { label: "WhatsApp", href: "https://wa.me/5531992021581" },
 ];
 
+const LOGLINES = [
+  "Boas histórias merecem bom código.",
+  "Uma ideia. Um commit. Uma nova cena.",
+  "Soluções que resolvem problemas.",
+];
+
 function Hero() {
+  const logline = useTypewriter(LOGLINES);
+
   return (
     <section id="abertura" className={styles.hero}>
       {/* Conteúdo principal */}
@@ -28,7 +34,10 @@ function Hero() {
           <span className={styles.nameLast}>Hermont</span>
         </h1>
 
-        <p className={styles.logline}>Boas histórias merecem bom código.</p>
+        <p className={styles.logline} aria-label="Boas histórias merecem bom código.">
+          <span>{logline}</span>
+          <span className={styles.cursor} aria-hidden="true" />
+        </p>
 
         <p className={styles.description}>
           Transformo curiosidade em software — com atenção às pessoas, aos
@@ -39,9 +48,6 @@ function Hero() {
           <a href="#projetos" className={styles.cta}>
             Explorar projetos <span aria-hidden="true">↗</span>
           </a>
-          <span className={styles.ctaNote}>
-            Uma ideia. Um commit. Uma nova cena.
-          </span>
         </div>
       </div>
 

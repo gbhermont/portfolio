@@ -48,6 +48,36 @@
   font-size: 1.4rem;
   font-family: var(--font-sans);
   color: var(--text-primary);
+  min-height: 1.4em; /* evita a frase "pular" de altura ao apagar/digitar */
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Cursor piscando do efeito máquina de escrever */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--accent);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
 }
 
 .description {
@@ -73,11 +103,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-}
-
-.ctaNote {
-  font-size: 0.85rem;
-  color: var(--text-muted);
 }
 
 /* Coluna direita: visual cinematográfico (elementos flutuantes/arrastáveis) */
