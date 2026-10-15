@@ -1,7 +1,8 @@
 /* ============================================================
    Design Tokens — identidade visual "cinema" (preto + dourado)
    Definidos como variáveis CSS para facilitar manutenção e temas.
-   O tema escuro é o padrão; o claro será adicionado depois.
+   O tema escuro é o padrão; o claro ("papel") é aplicado via
+   [data-theme="light"] no elemento <html>.
    ============================================================ */
 
 :root {
@@ -45,4 +46,31 @@
   /* Layout */
   --nav-height: 72px;
   --content-max: 1200px;
+}
+
+/* ============================================================
+   Tema claro ("papel") — redefine apenas as variáveis de cor.
+   Os componentes não mudam: eles leem estas variáveis.
+   ============================================================ */
+[data-theme="light"] {
+  /* Dourado escurecido para ter contraste sobre fundo claro */
+  --color-gold: #9a7420;
+  --color-gold-soft: #b8902f;
+
+  /* Tons de texto (quase preto sobre papel) */
+  --text-primary: #1a1813;
+  --text-secondary: #4a463d;
+  --text-muted: #7a756a;
+
+  /* Fundos (creme/papel, não branco puro) */
+  --bg: #f3efe6;
+  --bg-elevated: #e9e3d6;
+
+  /* Acento */
+  --accent: var(--color-gold);
+  --accent-strong: var(--color-gold-soft);
+
+  /* Bordas e linhas */
+  --border: rgba(154, 116, 32, 0.3);
+  --border-subtle: rgba(26, 24, 19, 0.12);
 }

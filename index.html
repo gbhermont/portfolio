@@ -18,6 +18,19 @@
       content="Portfólio profissional de Gabriel Hermont — Engenharia de Software."
     />
     <title>Gabriel Hermont — Portfólio</title>
+
+    <!-- Aplica o tema salvo antes do React montar, evitando "flash" de tema -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("theme") === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+          }
+        } catch (e) {
+          /* localStorage indisponível: mantém o tema escuro padrão */
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

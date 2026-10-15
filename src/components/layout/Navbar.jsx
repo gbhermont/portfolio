@@ -1,4 +1,5 @@
 import useActiveScene from "../../hooks/useActiveScene";
+import useTheme from "../../hooks/useTheme";
 import styles from "./Navbar.module.css";
 
 /**
@@ -31,6 +32,7 @@ const SCENE_IDS = [
 
 function Navbar() {
   const { activeId } = useActiveScene(SCENE_IDS);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className={styles.navbar}>
@@ -60,9 +62,14 @@ function Navbar() {
           <button
             type="button"
             className={styles.themeToggle}
-            aria-label="Alternar tema"
+            onClick={toggleTheme}
+            aria-label={
+              theme === "light"
+                ? "Ativar tema escuro"
+                : "Ativar tema claro"
+            }
           >
-            ☀ ☾
+            {theme === "light" ? "☾" : "☀"}
           </button>
           <div className={styles.lang}>
             <button type="button" className={styles.langActive}>
