@@ -1,4 +1,5 @@
 import styles from "./Hero.module.css";
+import HeroStage from "../ui/HeroStage/HeroStage";
 
 /**
  * Cena de abertura (página inicial / hero).
@@ -44,8 +45,9 @@ function Hero() {
         </div>
       </div>
 
-      {/* Visual cinematográfico (placeholder da imagem do protótipo) */}
-      <div className={styles.visual} aria-hidden="true">
+      {/* Visual cinematográfico: elementos flutuantes e arrastáveis */}
+      <div className={styles.visual}>
+        <HeroStage />
         <span className={styles.visualTag}>INT. FUTURO — DIA</span>
         <span className={styles.visualTag}>VOL. 01 / 2026</span>
       </div>

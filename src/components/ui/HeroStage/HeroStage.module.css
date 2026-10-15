@@ -1,0 +1,80 @@
+.stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.item {
+  position: absolute;
+  color: var(--accent);
+  cursor: grab;
+  touch-action: pan-y; /* no toque, o dedo continua rolando a página */
+  animation: float 6s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+}
+
+.item:active {
+  cursor: grabbing;
+}
+
+/* Enquanto arrasta, pausa a flutuação para o controle ser preciso */
+.dragging {
+  animation: none;
+  z-index: 10;
+  cursor: grabbing;
+}
+
+.svg {
+  display: block;
+}
+
+/* Imagens (galo e escudo do Atlético-MG) */
+.galo {
+  display: block;
+  height: 88px;
+  width: auto;
+  pointer-events: none; /* o arrasto é tratado pelo container do item */
+}
+
+.escudo {
+  display: block;
+  height: 72px;
+  width: auto;
+  pointer-events: none;
+}
+
+/* Cursor piscando do elemento "git" */
+.blink {
+  animation: blink 1.1s step-end infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Acessibilidade: desliga a flutuação para quem pede menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .blink {
+    animation: none;
+  }
+}

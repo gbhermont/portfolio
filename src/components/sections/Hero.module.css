@@ -80,10 +80,12 @@
   color: var(--text-muted);
 }
 
-/* Coluna direita: imagem/visual cinematográfico (placeholder) */
+/* Coluna direita: visual cinematográfico (elementos flutuantes/arrastáveis) */
 .visual {
   grid-column: 2;
   align-self: stretch;
+  position: relative;
+  overflow: hidden;
   margin-top: var(--nav-height);
   margin-bottom: var(--space-lg);
   border: 1px solid var(--border-subtle);
@@ -100,6 +102,9 @@
 }
 
 .visualTag {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.15em;
