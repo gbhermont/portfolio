@@ -61,7 +61,7 @@ function Projects() {
 
   // Ativa o modo pin só no desktop.
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 821px)");
+    const mq = window.matchMedia("(min-width: 981px)");
     const apply = () => setIsPinned(mq.matches);
     apply();
     mq.addEventListener("change", apply);

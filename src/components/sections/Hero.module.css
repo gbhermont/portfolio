@@ -200,20 +200,57 @@
   color: var(--text-muted);
 }
 
+/* ===================== Tablet / telas médias ===================== */
 @media (max-width: 980px) {
   .hero {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
   }
   .visual {
     display: none;
   }
   .content {
     grid-column: 1;
+    /* No mobile o conteúdo fica no topo, não centralizado verticalmente */
+    align-self: start;
+    padding-top: var(--space-lg);
   }
   .socialBar {
     grid-column: 1;
     flex-direction: column;
     gap: var(--space-sm);
     align-items: flex-start;
+  }
+}
+
+/* ===================== Celular ===================== */
+@media (max-width: 560px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: var(--space-lg);
+  }
+  .content {
+    gap: var(--space-sm);
+  }
+  .name {
+    font-size: clamp(2.6rem, 15vw, 4rem);
+  }
+  .logline {
+    font-size: 1.1rem;
+  }
+  .description {
+    font-size: 0.95rem;
+  }
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cta {
+    justify-content: center;
+  }
+  /* As redes sociais quebram em várias linhas se faltar espaço */
+  .socials {
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
   }
 }

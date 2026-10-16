@@ -80,8 +80,11 @@
   opacity: 0.7;
 }
 
-/* Esconde o menu lateral em telas menores (não há espaço na lateral) */
-@media (max-width: 1100px) {
+/* Esconde o menu lateral quando não há espaço garantido na lateral sem
+   sobrepor o conteúdo (que tem até 1200px). O conteúdo precisa de folga dos
+   dois lados; abaixo de ~1400px o menu invadiria o texto (acontece também
+   com zoom alto, que reduz a largura efetiva da viewport). */
+@media (max-width: 1400px) {
   .sceneIndex {
     display: none;
   }

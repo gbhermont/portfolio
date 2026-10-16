@@ -130,8 +130,66 @@
   color: var(--text-muted);
 }
 
+/* Botão hambúrguer — escondido no desktop */
+.menuToggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===================== Mobile ===================== */
 @media (max-width: 820px) {
-  .links {
+  .brandTag {
     display: none;
+  }
+
+  .menuToggle {
+    display: inline-flex;
+  }
+
+  /* Links viram um painel que desce abaixo da navbar */
+  .links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: var(--space-sm) var(--space-md);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .linksOpen {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .link {
+    width: 100%;
+    padding: var(--space-sm) 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  /* No painel, o underline animado não faz sentido */
+  .link::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .links {
+    transition: none;
   }
 }
