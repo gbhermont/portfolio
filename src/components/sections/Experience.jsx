@@ -1,50 +1,14 @@
 import { useTranslation } from "react-i18next";
 import styles from "./Experience.module.css";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
+import EXPERIENCES from "../../data/experiences";
 
 /**
  * Cena 05 — Experiência ("Aprender, na prática").
  * Timeline vertical: cabeçalho fixo (sticky) à esquerda e a lista de
- * experiências à direita. Conteúdo bilíngue (pt/en) e cabeçalho via i18n.
+ * experiências à direita. As experiências vêm de src/data/experiences.js
+ * (conteúdo bilíngue); o cabeçalho vem do i18n.
  */
-const EXPERIENCES = [
-  {
-    id: "techbiz",
-    period: { pt: "MAR 2026 — ATUAL", en: "MAR 2026 — PRESENT" },
-    role: {
-      pt: "Jovem Aprendiz em Infraestrutura",
-      en: "Young Apprentice in Infrastructure",
-    },
-    institution: "TechBiz Forense Digital",
-    description: {
-      pt: "Atuação em infraestrutura e cloud (AWS, Microsoft 365, Azure, AD e Entra ID), gestão e controle de inventário de ativos de TI e suporte a software e hardware. Produção de documentação técnica, atendimento ao usuário e trabalho em equipe. Também participo do desenvolvimento de um sistema próprio de CSC e gestão de ativos/empresarial, atuando na correção de bugs (dev) e em testes do sistema.",
-      en: "Work in infrastructure and cloud (AWS, Microsoft 365, Azure, AD and Entra ID), management and control of IT asset inventory, and software and hardware support. Production of technical documentation, user support and teamwork. I also take part in the development of an in-house CSC and asset/business management system, working on bug fixing (dev) and system testing.",
-    },
-    tags: {
-      pt: [
-        "AWS",
-        "Azure",
-        "Microsoft 365",
-        "Gestão de ativos de TI",
-        "Suporte técnico",
-        "Desenvolvimento",
-        "Testes",
-        "Documentação",
-      ],
-      en: [
-        "AWS",
-        "Azure",
-        "Microsoft 365",
-        "IT asset management",
-        "Technical support",
-        "Development",
-        "Testing",
-        "Documentation",
-      ],
-    },
-  },
-];
-
 function Experience() {
   const { ref, shown } = useRevealOnScroll();
   const { t, i18n } = useTranslation();

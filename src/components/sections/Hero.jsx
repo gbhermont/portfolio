@@ -4,19 +4,14 @@ import styles from "./Hero.module.css";
 import HeroStage from "../ui/HeroStage/HeroStage";
 import CurriculumModal from "../ui/CurriculumViewer/CurriculumModal";
 import useTypewriter from "../../hooks/useTypewriter";
+import { PROFILE, SOCIALS } from "../../data/profile";
 
 /**
  * Cena de abertura (página inicial / hero).
  * O menu lateral de cenas vive no layout (SceneIndex).
  * A logline usa efeito "máquina de escrever", alternando entre frases (i18n).
+ * Nome e redes sociais vêm de src/data/profile.js.
  */
-const SOCIALS = [
-  { label: "GitHub", href: "https://github.com/gbhermont" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/gbhermont" },
-  { label: "E-mail", href: "mailto:gabrielsjh2007@gmail.com" },
-  { label: "WhatsApp", href: "https://wa.me/5531992021581" },
-];
-
 function Hero() {
   const { t } = useTranslation();
   const [cvOpen, setCvOpen] = useState(false);
@@ -36,8 +31,8 @@ function Hero() {
         </p>
 
         <h1 className={`${styles.name} ${styles.reveal}`} style={{ "--i": 1 }}>
-          <span className={styles.nameFirst}>Gabriel</span>
-          <span className={styles.nameLast}>Hermont</span>
+          <span className={styles.nameFirst}>{PROFILE.firstName}</span>
+          <span className={styles.nameLast}>{PROFILE.lastName}</span>
         </h1>
 
         <p

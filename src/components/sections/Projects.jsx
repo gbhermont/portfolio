@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./Projects.module.css";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
+import PROJECTS from "../../data/projects";
 
 /**
  * Cena 04 — Em cartaz (Projetos).
@@ -12,53 +13,8 @@ import useRevealOnScroll from "../../hooks/useRevealOnScroll";
  *
  * Mobile: o efeito é desligado — os cards viram um carrossel por toque.
  *
- * Os projetos abaixo são placeholders; a lista real virá de src/data depois.
+ * Os projetos vêm de src/data/projects.js (dados separados da apresentação).
  */
-// Projetos placeholder. Título e descrição são bilíngues ({ pt, en }); a lista
-// real virá de src/data depois (REQ-02).
-const PROJECTS = [
-  {
-    num: "01",
-    title: { pt: "Projeto um", en: "Project one" },
-    description: {
-      pt: "Descrição curta do projeto (placeholder).",
-      en: "Short project description (placeholder).",
-    },
-    tags: ["React", "Vite", "CSS"],
-    github: "#",
-  },
-  {
-    num: "02",
-    title: { pt: "Projeto dois", en: "Project two" },
-    description: {
-      pt: "Descrição curta do projeto (placeholder).",
-      en: "Short project description (placeholder).",
-    },
-    tags: ["JavaScript", "HTML"],
-    github: "#",
-  },
-  {
-    num: "03",
-    title: { pt: "Projeto três", en: "Project three" },
-    description: {
-      pt: "Descrição curta do projeto (placeholder).",
-      en: "Short project description (placeholder).",
-    },
-    tags: ["Node.js", "Java"],
-    github: "#",
-  },
-  {
-    num: "04",
-    title: { pt: "Projeto quatro", en: "Project four" },
-    description: {
-      pt: "Descrição curta do projeto (placeholder).",
-      en: "Short project description (placeholder).",
-    },
-    tags: ["React", "Spring Boot"],
-    github: "#",
-  },
-];
-
 function Projects() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);

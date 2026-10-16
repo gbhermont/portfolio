@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.css";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
+import { CONTACT_CHANNELS } from "../../data/profile";
 
 /**
  * Cena 06 — Contato ("Vamos escrever a próxima cena?").
@@ -11,25 +12,8 @@ import useRevealOnScroll from "../../hooks/useRevealOnScroll";
  *
  * O envio usa o EmailJS (sem back-end). As chaves ficam em variáveis de
  * ambiente (.env, fora do versionamento). A validação usa React Hook Form.
+ * Os canais de contato vêm de src/data/profile.js.
  */
-const CHANNELS = [
-  {
-    kind: "E-MAIL",
-    value: "gabrielsjh2007@gmail.com",
-    href: "mailto:gabrielsjh2007@gmail.com",
-  },
-  {
-    kind: "WHATSAPP",
-    value: "+55 (31) 99202-1581",
-    href: "https://wa.me/5531992021581",
-  },
-  {
-    kind: "LINKEDIN",
-    value: "linkedin.com/in/gbhermont",
-    href: "https://www.linkedin.com/in/gbhermont",
-  },
-];
-
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -81,7 +65,7 @@ function Contact() {
         </p>
 
         <div className={styles.channels}>
-          {CHANNELS.map((channel) => (
+          {CONTACT_CHANNELS.map((channel) => (
             <a
               key={channel.kind}
               href={channel.href}

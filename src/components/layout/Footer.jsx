@@ -1,18 +1,13 @@
 import { useTranslation } from "react-i18next";
 import styles from "./Footer.module.css";
+import { PROFILE, SOCIALS } from "../../data/profile";
 
 /**
  * Rodapé no estilo "créditos finais" de filme.
  * Faz parte do layout principal (junto da Navbar).
  * O ano é gerado automaticamente para evitar manutenção manual.
+ * Nome e redes sociais vêm de src/data/profile.js.
  */
-const SOCIALS = [
-  { label: "GitHub", href: "https://github.com/gbhermont" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/gbhermont" },
-  { label: "E-mail", href: "mailto:gabrielsjh2007@gmail.com" },
-  { label: "WhatsApp", href: "https://wa.me/5531992021581" },
-];
-
 function Footer() {
   const { t } = useTranslation();
   const year = new Date().getFullYear();
@@ -21,7 +16,7 @@ function Footer() {
     <footer id="creditos" className={styles.footer}>
       <div className={styles.inner}>
         <span className={styles.credits}>{t("footer.credits")}</span>
-        <span className={styles.name}>Gabriel Hermont</span>
+        <span className={styles.name}>{PROFILE.name}</span>
 
         <nav className={styles.socials} aria-label={t("footer.socialsLabel")}>
           {SOCIALS.map((social) => (
