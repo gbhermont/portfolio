@@ -11,18 +11,20 @@
  *   tags        → tecnologias (nomes próprios, não traduzidos)
  *   github      → link do repositório ("#" enquanto não houver)
  *
- * Conteúdo placeholder: substituir pelos projetos reais (ver REQ-17).
+ * O projeto 01 (Meu Bolso) é real; os demais ainda são placeholder e serão
+ * substituídos pelos projetos reais (ver REQ-17).
  */
 const PROJECTS = [
   {
     num: "01",
-    title: { pt: "Projeto um", en: "Project one" },
+    title: { pt: "Meu Bolso", en: "Meu Bolso" },
     description: {
-      pt: "Descrição curta do projeto (placeholder).",
-      en: "Short project description (placeholder).",
+      pt: "Aplicação web de controle e educação financeira para jovens que estão começando a lidar com o próprio dinheiro. Permite registrar e categorizar gastos, definir metas e reservas e acompanhar a evolução financeira, com um assistente de IA que transforma os dados do usuário em orientações em linguagem acessível. Projeto em equipe do Trabalho Interdisciplinar (PUC Minas), vinculado ao ODS 8, onde atuo na frente de inteligência artificial.",
+      en: "A web app for financial control and education aimed at young people who are starting to manage their own money. It lets users record and categorize expenses, set goals and savings, and track their financial progress, with an AI assistant that turns the user's data into guidance in plain language. A team project from the Interdisciplinary Work course (PUC Minas), tied to UN SDG 8, where I work on the artificial intelligence side.",
     },
-    tags: ["React", "Vite", "CSS"],
-    github: "#",
+    tags: ["React", "Java", "Spring Boot", "Vite", "IA"],
+    github:
+      "https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2026-2-ti2-8183100-meu-bolso",
   },
   {
     num: "02",
