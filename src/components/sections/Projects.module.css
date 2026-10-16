@@ -4,19 +4,95 @@
   padding: var(--space-xl) var(--space-md);
 }
 
-/* Cabeçalho da cena (no topo, com os controles do carrossel à direita) */
+/* ===========================================================
+   MODO PIN (desktop): a seção é alta; o excedente de rolagem
+   vertical é convertido em deslocamento horizontal dos cards.
+   =========================================================== */
+.pinned {
+  max-width: none;
+  padding: 0;
+  height: 220vh; /* altura extra = tamanho do "percurso" horizontal */
+  position: relative;
+}
+
+.pinned .stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-md);
+  overflow: hidden;
+}
+
+/* Cabeçalho e barra alinhados à largura de conteúdo. */
+.pinned .header,
+.pinned .scrollbar {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* No modo pin, o viewport é limitado em largura (mostra ~2 cards por vez),
+   garantindo que os demais fiquem "fora" e criem o percurso horizontal mesmo
+   com cards de tamanho normal. */
+.pinned .viewport {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* O trilho começa alinhado ao conteúdo e tem respiro generoso no fim,
+   para o último card aparecer por completo ao término do percurso. */
+.pinned .track {
+  padding: 0 var(--space-lg) 0 var(--space-md);
+  width: max-content;
+}
+
+/* Cabeçalho da cena */
 .header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--space-md);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .headerText {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.arrow:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .sceneLabel {
@@ -37,66 +113,35 @@
   max-width: 42ch;
 }
 
-/* Controles do carrossel (setas) */
-.controls {
-  display: flex;
-  gap: var(--space-xs);
+/* Trilho dos cards */
+.viewport {
+  overflow: hidden;
 }
 
-.arrow {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-primary);
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.arrow:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.arrow:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* Trilho do carrossel: rolagem horizontal */
 .track {
   display: flex;
   gap: var(--space-md);
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  padding-bottom: var(--space-sm);
-  /* esconde a barra de rolagem mantendo a função */
-  scrollbar-width: none;
+  will-change: transform;
 }
 
-.track::-webkit-scrollbar {
-  display: none;
-}
-
-/* Card de projeto (estilo "pôster") */
+/* Card — retangular (tamanho normal) */
 .card {
-  flex: 0 0 320px;
-  scroll-snap-align: start;
+  flex: 0 0 clamp(300px, 42vw, 460px);
   border: 1px solid var(--border-subtle);
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--bg-elevated);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border);
 }
 
 .poster {
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   background: linear-gradient(
     160deg,
     var(--color-ink) 0%,
@@ -122,19 +167,19 @@
 }
 
 .cardBody {
-  padding: var(--space-sm);
+  padding: var(--space-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
 }
 
 .cardTitle {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--text-primary);
 }
 
 .cardDesc {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
 }
 
@@ -161,9 +206,38 @@
   gap: 0.4rem;
 }
 
-@media (max-width: 820px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+/* Barra de progresso do percurso horizontal */
+.scrollbar {
+  position: relative;
+  height: 4px;
+  margin-top: var(--space-md);
+  background: var(--border-subtle);
+  border-radius: 999px;
+}
+
+.scrollThumb {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  min-width: 32px;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+/* ===========================================================
+   MOBILE / sem pin: carrossel comum por toque.
+   =========================================================== */
+.projects:not(.pinned) .viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.projects:not(.pinned) .viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.projects:not(.pinned) .card {
+  flex-basis: clamp(260px, 80vw, 340px);
+  scroll-snap-align: start;
 }
