@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import useActiveScene from "../../hooks/useActiveScene";
 import styles from "./SceneIndex.module.css";
 
@@ -10,24 +11,26 @@ import styles from "./SceneIndex.module.css";
  *   vindos do hook compartilhado useActiveScene (mesma fonte da Navbar).
  * - Acessível por teclado: por serem links <a>, recebem foco e Enter nativos.
  */
+// id da seção + chave de tradução do rótulo de cada cena.
 const SCENES = [
-  { num: "01", label: "Abertura", id: "abertura" },
-  { num: "02", label: "Sobre mim", id: "sobre" },
-  { num: "03", label: "Tecnologias", id: "tecnologias" },
-  { num: "04", label: "Em cartaz", id: "projetos" },
-  { num: "05", label: "Experiência", id: "experiencia" },
-  { num: "06", label: "Contato", id: "contato" },
-  { num: "07", label: "Créditos", id: "creditos" },
+  { num: "01", key: "scenes.abertura", id: "abertura" },
+  { num: "02", key: "scenes.sobre", id: "sobre" },
+  { num: "03", key: "scenes.tecnologias", id: "tecnologias" },
+  { num: "04", key: "scenes.projetos", id: "projetos" },
+  { num: "05", key: "scenes.experiencia", id: "experiencia" },
+  { num: "06", key: "scenes.contato", id: "contato" },
+  { num: "07", key: "scenes.creditos", id: "creditos" },
 ];
 
 const SCENE_IDS = SCENES.map((scene) => scene.id);
 
 function SceneIndex() {
+  const { t } = useTranslation();
   const { activeId, progress } = useActiveScene(SCENE_IDS);
 
   return (
-    <aside className={styles.sceneIndex} aria-label="Índice de cenas">
-      <span className={styles.label}>CENAS</span>
+    <aside className={styles.sceneIndex} aria-label={t("scenes.indexLabel")}>
+      <span className={styles.label}>{t("scenes.label")}</span>
 
       <div className={styles.scenes}>
         {/* Trilho da barra de progresso (cinza) + preenchimento dourado.
@@ -46,7 +49,7 @@ function SceneIndex() {
               aria-current={isActive ? "true" : undefined}
             >
               <span className={styles.num}>{scene.num}</span>
-              {scene.label}
+              {t(scene.key)}
             </a>
           );
         })}

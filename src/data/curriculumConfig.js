@@ -14,6 +14,12 @@ const CURRICULUM_CONFIG = {
       file: "/curriculo-exemplo.pdf",
       downloadName: "Curriculo-Gabriel-Hermont.pdf",
     },
+    {
+      id: "en",
+      label: "English",
+      file: "/curriculo-exemplo-en.pdf",
+      downloadName: "Resume-Gabriel-Hermont.pdf",
+    },
   ],
   ZOOM_MIN: 0.5,
   ZOOM_MAX: 2,

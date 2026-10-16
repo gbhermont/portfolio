@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.css";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
@@ -44,6 +45,7 @@ function Contact() {
   // "idle" | "success" | "error"
   const [status, setStatus] = useState("idle");
   const { ref, shown } = useRevealOnScroll();
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     setStatus("idle");
@@ -69,15 +71,13 @@ function Contact() {
     >
       {/* Coluna esquerda: título + canais */}
       <div className={`${styles.left} revealItem`} style={{ "--i": 0 }}>
-        <span className={styles.sceneLabel}>SCENE 06 — CONTATO</span>
-        <h2 className={styles.title}>Vamos escrever a próxima cena?</h2>
-        <p className={styles.intro}>
-          Tem uma oportunidade ou ideia? Fala comigo por um destes canais.
-        </p>
+        <span className={styles.sceneLabel}>{t("contact.sceneLabel")}</span>
+        <h2 className={styles.title}>{t("contact.title")}</h2>
+        <p className={styles.intro}>{t("contact.intro")}</p>
 
         <p className={styles.availability}>
           <span className={styles.dot} aria-hidden="true" />
-          DISPONÍVEL PARA OPORTUNIDADES
+          {t("contact.availability")}
         </p>
 
         <div className={styles.channels}>
@@ -106,22 +106,22 @@ function Contact() {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <h3 className={styles.formTitle}>Deixe sua mensagem.</h3>
+        <h3 className={styles.formTitle}>{t("contact.formTitle")}</h3>
 
         <div className={styles.row}>
           <div className={styles.field}>
             <label className={styles.label} htmlFor="nome">
-              NOME
+              {t("contact.nameLabel")}
             </label>
             <input
               id="nome"
               type="text"
               className={styles.input}
-              placeholder="Como você se chama?"
+              placeholder={t("contact.namePlaceholder")}
               aria-invalid={errors.nome ? "true" : "false"}
               {...register("nome", {
-                required: "Informe seu nome.",
-                minLength: { value: 2, message: "Nome muito curto." },
+                required: t("contact.errNameRequired"),
+                minLength: { value: 2, message: t("contact.errNameShort") },
               })}
             />
             {errors.nome && (
@@ -130,19 +130,19 @@ function Contact() {
           </div>
           <div className={styles.field}>
             <label className={styles.label} htmlFor="email">
-              E-MAIL
+              {t("contact.emailLabel")}
             </label>
             <input
               id="email"
               type="email"
               className={styles.input}
-              placeholder="voce@exemplo.com"
+              placeholder={t("contact.emailPlaceholder")}
               aria-invalid={errors.email ? "true" : "false"}
               {...register("email", {
-                required: "Informe seu e-mail.",
+                required: t("contact.errEmailRequired"),
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "E-mail inválido.",
+                  message: t("contact.errEmailInvalid"),
                 },
               })}
             />
@@ -154,16 +154,16 @@ function Contact() {
 
         <div className={styles.field}>
           <label className={styles.label} htmlFor="mensagem">
-            MENSAGEM
+            {t("contact.messageLabel")}
           </label>
           <textarea
             id="mensagem"
             className={styles.textarea}
-            placeholder="Conte um pouco sobre a sua ideia ou oportunidade..."
+            placeholder={t("contact.messagePlaceholder")}
             aria-invalid={errors.mensagem ? "true" : "false"}
             {...register("mensagem", {
-              required: "Escreva uma mensagem.",
-              minLength: { value: 10, message: "Mensagem muito curta." },
+              required: t("contact.errMessageRequired"),
+              minLength: { value: 10, message: t("contact.errMessageShort") },
             })}
           />
           {errors.mensagem && (
@@ -172,22 +172,18 @@ function Contact() {
         </div>
 
         <button type="submit" className={styles.submit} disabled={isSubmitting}>
-          {isSubmitting ? "Enviando..." : "Enviar mensagem"}{" "}
+          {isSubmitting ? t("contact.submitting") : t("contact.submit")}{" "}
           <span aria-hidden="true">↗</span>
         </button>
 
         {status === "success" && (
-          <span className={styles.success}>
-            Mensagem enviada — nos vemos na próxima cena.
-          </span>
+          <span className={styles.success}>{t("contact.success")}</span>
         )}
         {status === "error" && (
-          <span className={styles.error}>
-            Algo deu errado no envio. Tente novamente ou use outro canal.
-          </span>
+          <span className={styles.error}>{t("contact.error")}</span>
         )}
         {status === "idle" && (
-          <span className={styles.note}>Todos os campos são obrigatórios.</span>
+          <span className={styles.note}>{t("contact.required")}</span>
         )}
       </form>
     </section>

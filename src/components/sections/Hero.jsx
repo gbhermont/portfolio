@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./Hero.module.css";
 import HeroStage from "../ui/HeroStage/HeroStage";
 import CurriculumModal from "../ui/CurriculumViewer/CurriculumModal";
@@ -7,7 +8,7 @@ import useTypewriter from "../../hooks/useTypewriter";
 /**
  * Cena de abertura (página inicial / hero).
  * O menu lateral de cenas vive no layout (SceneIndex).
- * A logline usa efeito "máquina de escrever", alternando entre frases.
+ * A logline usa efeito "máquina de escrever", alternando entre frases (i18n).
  */
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/gbhermont" },
@@ -16,15 +17,14 @@ const SOCIALS = [
   { label: "WhatsApp", href: "https://wa.me/5531992021581" },
 ];
 
-const LOGLINES = [
-  "Boas histórias merecem bom código.",
-  "Uma ideia. Um commit. Uma nova cena.",
-  "Soluções que resolvem problemas.",
-];
-
 function Hero() {
-  const logline = useTypewriter(LOGLINES);
+  const { t } = useTranslation();
   const [cvOpen, setCvOpen] = useState(false);
+  const logline = useTypewriter([
+    t("hero.logline1"),
+    t("hero.logline2"),
+    t("hero.logline3"),
+  ]);
 
   return (
     <section id="abertura" className={styles.hero}>
@@ -32,7 +32,7 @@ function Hero() {
           entrada em cascata (stagger): cada elemento surge com um atraso. */}
       <div className={styles.content}>
         <p className={`${styles.eyebrow} ${styles.reveal}`} style={{ "--i": 0 }}>
-          ENGENHARIA DE SOFTWARE · EM FORMAÇÃO
+          {t("hero.eyebrow")}
         </p>
 
         <h1 className={`${styles.name} ${styles.reveal}`} style={{ "--i": 1 }}>
@@ -43,15 +43,14 @@ function Hero() {
         <p
           className={`${styles.logline} ${styles.reveal}`}
           style={{ "--i": 2 }}
-          aria-label="Boas histórias merecem bom código."
+          aria-label={t("hero.logline1")}
         >
           <span>{logline}</span>
           <span className={styles.cursor} aria-hidden="true" />
         </p>
 
         <p className={`${styles.description} ${styles.reveal}`} style={{ "--i": 3 }}>
-          Transformo curiosidade em software — com atenção às pessoas, aos
-          detalhes e ao que vem a seguir.
+          {t("hero.description")}
         </p>
 
         <div className={`${styles.actions} ${styles.reveal}`} style={{ "--i": 4 }}>
@@ -60,7 +59,7 @@ function Hero() {
             className={styles.cta}
             onClick={() => setCvOpen(true)}
           >
-            Ver meu currículo <span aria-hidden="true">↗</span>
+            {t("hero.cta")} <span aria-hidden="true">↗</span>
           </button>
         </div>
       </div>
@@ -74,7 +73,7 @@ function Hero() {
 
       {/* Rodapé do hero: redes sociais + pista de rolagem */}
       <div className={`${styles.socialBar} ${styles.reveal}`} style={{ "--i": 6 }}>
-        <nav className={styles.socials} aria-label="Redes sociais">
+        <nav className={styles.socials} aria-label={t("hero.socialsLabel")}>
           {SOCIALS.map((social) => (
             <a
               key={social.label}
@@ -87,7 +86,7 @@ function Hero() {
             </a>
           ))}
         </nav>
-        <span className={styles.scrollHint}>role para a próxima cena ⌄</span>
+        <span className={styles.scrollHint}>{t("hero.scrollHint")}</span>
       </div>
 
       <CurriculumModal open={cvOpen} onClose={() => setCvOpen(false)} />

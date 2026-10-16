@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "./Footer.module.css";
 
 /**
@@ -13,15 +14,16 @@ const SOCIALS = [
 ];
 
 function Footer() {
+  const { t } = useTranslation();
   const year = new Date().getFullYear();
 
   return (
     <footer id="creditos" className={styles.footer}>
       <div className={styles.inner}>
-        <span className={styles.credits}>CRÉDITOS FINAIS</span>
+        <span className={styles.credits}>{t("footer.credits")}</span>
         <span className={styles.name}>Gabriel Hermont</span>
 
-        <nav className={styles.socials} aria-label="Redes sociais">
+        <nav className={styles.socials} aria-label={t("footer.socialsLabel")}>
           {SOCIALS.map((social) => (
             <a
               key={social.label}
@@ -36,11 +38,11 @@ function Footer() {
         </nav>
 
         <div className={styles.meta}>
-          <span>Engenharia de Software · PUC Minas</span>
-          <span>© {year} Gabriel Hermont. Todos os direitos reservados.</span>
+          <span>{t("footer.meta1")}</span>
+          <span>{t("footer.meta2", { year })}</span>
         </div>
 
-        <span className={styles.theEnd}>fim.</span>
+        <span className={styles.theEnd}>{t("footer.theEnd")}</span>
       </div>
     </footer>
   );

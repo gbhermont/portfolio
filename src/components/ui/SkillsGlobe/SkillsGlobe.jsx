@@ -73,7 +73,12 @@ const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
-export default function SkillsGlobe({ skills, speed = 0.15, color = "#c9a24b" }) {
+export default function SkillsGlobe({
+  skills,
+  speed = 0.15,
+  color = "#c9a24b",
+  label = "Skills",
+}) {
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
   const itemsRef = useRef([]);
@@ -264,7 +269,7 @@ export default function SkillsGlobe({ skills, speed = 0.15, color = "#c9a24b" })
       onClickCapture={onClickCapture}
     >
       <canvas ref={canvasRef} className="skills-globe-canvas" aria-hidden="true" />
-      <ul className="skills-globe-layer" aria-label="Habilidades">
+      <ul className="skills-globe-layer" aria-label={label}>
         {skills.map((skill, i) => {
           const Icon = skill.icon;
           return (

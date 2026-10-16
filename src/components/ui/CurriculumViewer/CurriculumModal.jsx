@@ -1,4 +1,5 @@
 import { Suspense, lazy, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { FiX } from "react-icons/fi";
 import "./CurriculumModal.css";
 
@@ -10,6 +11,8 @@ const CurriculumViewer = lazy(() => import("./CurriculumViewer.jsx"));
  * Fecha ao clicar fora, no botão X ou com a tecla Esc.
  */
 function CurriculumModal({ open, onClose }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (e) => {
@@ -30,13 +33,13 @@ function CurriculumModal({ open, onClose }) {
       className="cv-overlay"
       role="dialog"
       aria-modal="true"
-      aria-label="Currículo"
+      aria-label={t("curriculum.modalTitle")}
       onClick={onClose}
     >
       <div className="cv-modal" onClick={(e) => e.stopPropagation()}>
         <div className="cv-modal-head">
-          <span className="cv-modal-title">CURRÍCULO</span>
-          <button type="button" className="cv-close" onClick={onClose} aria-label="Fechar">
+          <span className="cv-modal-title">{t("curriculum.modalTitle")}</span>
+          <button type="button" className="cv-close" onClick={onClose} aria-label={t("curriculum.close")}>
             <FiX aria-hidden="true" />
           </button>
         </div>
@@ -44,7 +47,7 @@ function CurriculumModal({ open, onClose }) {
           <Suspense
             fallback={
               <p className="cv-status" role="status">
-                <span className="cv-spinner" aria-hidden="true" /> Carregando...
+                <span className="cv-spinner" aria-hidden="true" /> {t("curriculum.loading")}
               </p>
             }
           >

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./Projects.module.css";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 
@@ -13,36 +14,46 @@ import useRevealOnScroll from "../../hooks/useRevealOnScroll";
  *
  * Os projetos abaixo são placeholders; a lista real virá de src/data depois.
  */
+// Projetos placeholder. Título e descrição são bilíngues ({ pt, en }); a lista
+// real virá de src/data depois (REQ-02).
 const PROJECTS = [
   {
     num: "01",
-    title: "Projeto um",
-    kind: "PROJETO ACADÊMICO",
-    description: "Descrição curta do projeto (placeholder).",
+    title: { pt: "Projeto um", en: "Project one" },
+    description: {
+      pt: "Descrição curta do projeto (placeholder).",
+      en: "Short project description (placeholder).",
+    },
     tags: ["React", "Vite", "CSS"],
     github: "#",
   },
   {
     num: "02",
-    title: "Projeto dois",
-    kind: "PROJETO ACADÊMICO",
-    description: "Descrição curta do projeto (placeholder).",
+    title: { pt: "Projeto dois", en: "Project two" },
+    description: {
+      pt: "Descrição curta do projeto (placeholder).",
+      en: "Short project description (placeholder).",
+    },
     tags: ["JavaScript", "HTML"],
     github: "#",
   },
   {
     num: "03",
-    title: "Projeto três",
-    kind: "PROJETO ACADÊMICO",
-    description: "Descrição curta do projeto (placeholder).",
+    title: { pt: "Projeto três", en: "Project three" },
+    description: {
+      pt: "Descrição curta do projeto (placeholder).",
+      en: "Short project description (placeholder).",
+    },
     tags: ["Node.js", "Java"],
     github: "#",
   },
   {
     num: "04",
-    title: "Projeto quatro",
-    kind: "PROJETO ACADÊMICO",
-    description: "Descrição curta do projeto (placeholder).",
+    title: { pt: "Projeto quatro", en: "Project four" },
+    description: {
+      pt: "Descrição curta do projeto (placeholder).",
+      en: "Short project description (placeholder).",
+    },
     tags: ["React", "Spring Boot"],
     github: "#",
   },
@@ -52,6 +63,8 @@ function Projects() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const { ref, shown } = useRevealOnScroll();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.resolvedLanguage === "en" ? "en" : "pt";
 
   const [progress, setProgress] = useState(0);
   const [isPinned, setIsPinned] = useState(false);
@@ -146,11 +159,9 @@ function Projects() {
       <div className={styles.stage}>
         <div className={`${styles.header} ${isPinned ? "" : "revealItem"}`} style={{ "--i": 0 }}>
           <div className={styles.headerText}>
-            <span className={styles.sceneLabel}>SCENE 04 — EM CARTAZ</span>
-            <h2 className={styles.title}>Em cartaz.</h2>
-            <p className={styles.intro}>
-              Projetos que desenvolvi, do mais antigo ao mais recente.
-            </p>
+            <span className={styles.sceneLabel}>{t("projects.sceneLabel")}</span>
+            <h2 className={styles.title}>{t("projects.title")}</h2>
+            <p className={styles.intro}>{t("projects.intro")}</p>
           </div>
 
           <div className={styles.controls}>
@@ -159,7 +170,7 @@ function Projects() {
               className={styles.arrow}
               onClick={() => goToProject(-1)}
               disabled={current === 0}
-              aria-label="Projeto anterior"
+              aria-label={t("projects.prev")}
             >
               ‹
             </button>
@@ -168,7 +179,7 @@ function Projects() {
               className={styles.arrow}
               onClick={() => goToProject(1)}
               disabled={current === PROJECTS.length - 1}
-              aria-label="Próximo projeto"
+              aria-label={t("projects.next")}
             >
               ›
             </button>
@@ -185,11 +196,11 @@ function Projects() {
               >
                 <div className={styles.poster}>
                   <span className={styles.cardNum}>{project.num}</span>
-                  <span className={styles.cardKind}>{project.kind}</span>
+                  <span className={styles.cardKind}>{t("projects.kind")}</span>
                 </div>
                 <div className={styles.cardBody}>
-                  <h3 className={styles.cardTitle}>{project.title}</h3>
-                  <p className={styles.cardDesc}>{project.description}</p>
+                  <h3 className={styles.cardTitle}>{project.title[lang]}</h3>
+                  <p className={styles.cardDesc}>{project.description[lang]}</p>
                   <div className={styles.tags}>
                     {project.tags.map((tag) => (
                       <span key={tag} className={styles.tag}>
@@ -203,7 +214,7 @@ function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Ver no GitHub <span aria-hidden="true">↗</span>
+                    {t("projects.viewGithub")} <span aria-hidden="true">↗</span>
                   </a>
                 </div>
               </article>

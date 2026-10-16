@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FiDownload,
   FiExternalLink,
@@ -26,8 +27,12 @@ const { FILES, ZOOM_MIN, ZOOM_MAX, ZOOM_STEP } = CURRICULUM_CONFIG;
  * JavaScript e para o tema do portfólio.
  */
 export default function CurriculumViewer({ files = FILES }) {
+  const { t, i18n } = useTranslation();
   const areaRef = useRef(null);
-  const [current, setCurrent] = useState(files[0]);
+  // Começa pelo currículo no idioma atual do site (en → "en"), com fallback no 1º.
+  const initial =
+    files.find((f) => i18n.resolvedLanguage?.startsWith(f.id)) ?? files[0];
+  const [current, setCurrent] = useState(initial);
   const [pages, setPages] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [width, setWidth] = useState(null);
@@ -62,7 +67,7 @@ export default function CurriculumViewer({ files = FILES }) {
       <div className="cv-toolbar">
         <div className="cv-toolbar-left">
           {files.length > 1 && (
-            <div className="cv-langs" role="group" aria-label="Idioma do currículo">
+            <div className="cv-langs" role="group" aria-label={t("curriculum.langGroupLabel")}>
               {files.map((file) => (
                 <button
                   key={file.id}
@@ -78,32 +83,32 @@ export default function CurriculumViewer({ files = FILES }) {
           )}
           {pages > 0 && (
             <span className="cv-pages">
-              {pages} {pages === 1 ? "página" : "páginas"}
+              {pages} {pages === 1 ? t("curriculum.page") : t("curriculum.pages")}
             </span>
           )}
         </div>
 
-        <div className="cv-zoom" role="group" aria-label="Zoom">
-          <button type="button" onClick={() => changeZoom(-ZOOM_STEP)} disabled={zoom <= ZOOM_MIN} title="Diminuir zoom">
+        <div className="cv-zoom" role="group" aria-label={t("curriculum.zoomLabel")}>
+          <button type="button" onClick={() => changeZoom(-ZOOM_STEP)} disabled={zoom <= ZOOM_MIN} title={t("curriculum.zoomOut")}>
             <FiZoomOut aria-hidden="true" />
           </button>
           <span className="cv-zoom-value" aria-live="polite">
             {Math.round(zoom * 100)}%
           </span>
-          <button type="button" onClick={() => changeZoom(ZOOM_STEP)} disabled={zoom >= ZOOM_MAX} title="Aumentar zoom">
+          <button type="button" onClick={() => changeZoom(ZOOM_STEP)} disabled={zoom >= ZOOM_MAX} title={t("curriculum.zoomIn")}>
             <FiZoomIn aria-hidden="true" />
           </button>
-          <button type="button" onClick={() => setZoom(1)} disabled={zoom === 1} title="Ajustar à largura">
+          <button type="button" onClick={() => setZoom(1)} disabled={zoom === 1} title={t("curriculum.fitWidth")}>
             <FiMaximize2 aria-hidden="true" />
           </button>
         </div>
 
         <div className="cv-actions">
           <a className="cv-button primary" href={current.file} download={current.downloadName}>
-            <FiDownload aria-hidden="true" /> Baixar PDF
+            <FiDownload aria-hidden="true" /> {t("curriculum.download")}
           </a>
           <a className="cv-button" href={current.file} target="_blank" rel="noopener noreferrer">
-            <FiExternalLink aria-hidden="true" /> Abrir
+            <FiExternalLink aria-hidden="true" /> {t("curriculum.open")}
           </a>
         </div>
       </div>
@@ -111,14 +116,17 @@ export default function CurriculumViewer({ files = FILES }) {
       <div className="cv-area" ref={areaRef}>
         {loading && (
           <p className="cv-status" role="status">
-            <span className="cv-spinner" aria-hidden="true" /> Carregando currículo...
+            <span className="cv-spinner" aria-hidden="true" /> {t("curriculum.loadingResume")}
           </p>
         )}
 
         {error ? (
           <p className="cv-status cv-error">
-            Não foi possível exibir o PDF aqui. Use os botões <strong>Baixar PDF</strong> ou{" "}
-            <strong>Abrir</strong>.
+            {t("curriculum.errorPrefix")}
+            <strong>{t("curriculum.download")}</strong>
+            {t("curriculum.errorMid")}
+            <strong>{t("curriculum.open")}</strong>
+            {t("curriculum.errorSuffix")}
           </p>
         ) : (
           <Document
