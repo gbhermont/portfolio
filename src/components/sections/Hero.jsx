@@ -1,5 +1,7 @@
+import { useState } from "react";
 import styles from "./Hero.module.css";
 import HeroStage from "../ui/HeroStage/HeroStage";
+import CurriculumModal from "../ui/CurriculumViewer/CurriculumModal";
 import useTypewriter from "../../hooks/useTypewriter";
 
 /**
@@ -22,6 +24,7 @@ const LOGLINES = [
 
 function Hero() {
   const logline = useTypewriter(LOGLINES);
+  const [cvOpen, setCvOpen] = useState(false);
 
   return (
     <section id="abertura" className={styles.hero}>
@@ -52,9 +55,13 @@ function Hero() {
         </p>
 
         <div className={`${styles.actions} ${styles.reveal}`} style={{ "--i": 4 }}>
-          <a href="#projetos" className={styles.cta}>
-            Explorar projetos <span aria-hidden="true">↗</span>
-          </a>
+          <button
+            type="button"
+            className={styles.cta}
+            onClick={() => setCvOpen(true)}
+          >
+            Ver meu currículo <span aria-hidden="true">↗</span>
+          </button>
         </div>
       </div>
 
@@ -82,6 +89,8 @@ function Hero() {
         </nav>
         <span className={styles.scrollHint}>role para a próxima cena ⌄</span>
       </div>
+
+      <CurriculumModal open={cvOpen} onClose={() => setCvOpen(false)} />
     </section>
   );
 }
