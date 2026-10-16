@@ -10,6 +10,7 @@
  *   description → { pt, en } descrição curta
  *   tags        → tecnologias (nomes próprios, não traduzidos)
  *   github      → link do repositório ("#" enquanto não houver)
+ *   image       → (opcional) caminho da imagem/logo exibida no poster do card
  *
  * O projeto 01 (Meu Bolso) é real; os demais ainda são placeholder e serão
  * substituídos pelos projetos reais (ver REQ-17).
@@ -25,6 +26,7 @@ const PROJECTS = [
     tags: ["React", "Java", "Spring Boot", "Vite", "IA"],
     github:
       "https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2026-2-ti2-8183100-meu-bolso",
+    image: "/projetos/meu-bolso.png",
   },
   {
     num: "02",

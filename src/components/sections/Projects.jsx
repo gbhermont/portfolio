@@ -23,15 +23,20 @@ function Projects() {
   const lang = i18n.resolvedLanguage === "en" ? "en" : "pt";
 
   const [progress, setProgress] = useState(0);
-  const [isPinned, setIsPinned] = useState(false);
+  const [isWide, setIsWide] = useState(false);
+
+  // O modo "pin + scroll horizontal" só faz sentido no desktop E com mais de um
+  // projeto (com um só card não há percurso horizontal a rolar).
+  const isPinned = isWide && PROJECTS.length > 1;
 
   // Índice do projeto atual (derivado do progresso), para as setas.
-  const current = Math.round(progress * (PROJECTS.length - 1));
+  const steps = Math.max(1, PROJECTS.length - 1);
+  const current = Math.round(progress * steps);
 
   // Ativa o modo pin só no desktop.
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 981px)");
-    const apply = () => setIsPinned(mq.matches);
+    const apply = () => setIsWide(mq.matches);
     apply();
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
@@ -49,7 +54,7 @@ function Projects() {
       const section = sectionRef.current;
       if (!section) return;
       const scrollable = section.offsetHeight - window.innerHeight;
-      const ratio = target / (PROJECTS.length - 1);
+      const ratio = target / steps;
       const top = section.offsetTop + ratio * scrollable;
       window.scrollTo({ top, behavior: "smooth" });
     } else {
@@ -108,9 +113,9 @@ function Projects() {
         sectionRef.current = node;
         ref.current = node;
       }}
-      className={`${styles.projects} ${isPinned ? styles.pinned : ""} revealGroup ${
-        shown ? "is-shown" : ""
-      }`}
+      className={`${styles.projects} ${isPinned ? styles.pinned : ""} ${
+        PROJECTS.length === 1 ? styles.single : ""
+      } revealGroup ${shown ? "is-shown" : ""}`}
     >
       <div className={styles.stage}>
         <div className={`${styles.header} ${isPinned ? "" : "revealItem"}`} style={{ "--i": 0 }}>
@@ -150,7 +155,19 @@ function Projects() {
                 className={`${styles.card} ${isPinned ? "" : "revealItem"}`}
                 style={{ "--i": index + 1 }}
               >
-                <div className={styles.poster}>
+                <div
+                  className={`${styles.poster} ${
+                    project.image ? styles.posterImage : ""
+                  }`}
+                >
+                  {project.image && (
+                    <img
+                      src={project.image}
+                      alt={project.title[lang]}
+                      className={styles.posterImg}
+                      loading="lazy"
+                    />
+                  )}
                   <span className={styles.cardNum}>{project.num}</span>
                   <span className={styles.cardKind}>{t("projects.kind")}</span>
                 </div>
