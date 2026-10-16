@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GH — Gabriel Hermont">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e4c87d"/>
+      <stop offset="1" stop-color="#c9a24b"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0b0b0d"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="12" fill="none" stroke="#c9a24b" stroke-opacity="0.35" stroke-width="1.5"/>
+  <text x="32" y="33" fill="url(#gold)" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" text-anchor="middle" dominant-baseline="central" letter-spacing="-1">GH</text>
+</svg>
