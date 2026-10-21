@@ -11,13 +11,13 @@ const CURRICULUM_CONFIG = {
     {
       id: "pt",
       label: "Português",
-      file: "/curriculo-exemplo.pdf",
+      file: "/curriculo-pt.pdf",
       downloadName: "Curriculo-Gabriel-Hermont.pdf",
     },
     {
       id: "en",
       label: "English",
-      file: "/curriculo-exemplo-en.pdf",
+      file: "/curriculo-en.pdf",
       downloadName: "Resume-Gabriel-Hermont.pdf",
     },
   ],
