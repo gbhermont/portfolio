@@ -155,6 +155,22 @@
   padding: var(--space-sm);
 }
 
+/* Tema claro: o quadro deixa de ser escuro e fica claro como o resto da
+   página. Para os limites continuarem perceptíveis (sem o contraste do
+   fundo preto), aplicamos uma grade de pontos redondos bem suaves e uma
+   borda um pouco mais visível. */
+:global([data-theme="light"]) .visual {
+  background-color: var(--bg-elevated);
+  background-image: radial-gradient(
+    circle,
+    rgba(26, 24, 19, 0.16) 1.2px,
+    transparent 1.3px
+  );
+  background-size: 18px 18px;
+  background-position: 0 0;
+  border-color: rgba(26, 24, 19, 0.16);
+}
+
 .visualTag {
   position: relative;
   z-index: 2;
