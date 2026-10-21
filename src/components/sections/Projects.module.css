@@ -21,8 +21,13 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: var(--space-md);
+  /* Header e barra no fluxo normal (topo/base); o viewport cresce e ocupa o
+     espaço do meio, onde o card é centralizado. Antes o justify-content:center
+     fazia o header empurrar o card para baixo, cortando-o na borda inferior. */
+  justify-content: flex-start;
+  gap: clamp(var(--space-sm), 2vh, var(--space-md));
+  /* Respiro sob a navbar fixa, para o cabeçalho não ficar atrás dela. */
+  padding: calc(var(--nav-height) + var(--space-sm)) 0 var(--space-md);
   overflow: hidden;
 }
 
@@ -34,20 +39,49 @@
   padding: 0 var(--space-md);
 }
 
-/* No modo pin, o viewport é limitado em largura (mostra ~2 cards por vez),
-   garantindo que os demais fiquem "fora" e criem o percurso horizontal mesmo
-   com cards de tamanho normal. */
-.pinned .viewport {
-  width: min(100%, 1000px);
-  margin: 0 auto;
-  overflow: hidden;
+/* Header e barra não encolhem; o viewport (card) fica com o espaço do meio. */
+.pinned .header,
+.pinned .scrollbar {
+  flex-shrink: 0;
 }
 
-/* O trilho começa alinhado ao conteúdo e tem respiro generoso no fim,
-   para o último card aparecer por completo ao término do percurso. */
+/* No pin o header é enxuto: sem a margem inferior padrão e com título menor,
+   para não roubar a altura que o card precisa. */
+.pinned .header {
+  margin-bottom: 0;
+}
+
+.pinned .title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.pinned .intro {
+  display: none;
+}
+
+/* No modo pin mostramos UM card por vez (layout horizontal: imagem à
+   esquerda, conteúdo à direita). O viewport define a largura visível; os
+   demais cards ficam "fora" e criam o percurso horizontal do efeito cinema. */
+.pinned .viewport {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+  overflow: hidden;
+  /* Ocupa todo o espaço entre o header (topo) e a barra (base) e centraliza
+     o card verticalmente nesse espaço. Assim o card nunca é empurrado para
+     fora pela altura do header. */
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* O trilho preenche a altura disponível para os cards horizontais ocuparem
+   bem o espaço. Sem padding lateral: o percurso termina exatamente no último
+   card (padding à direita deixaria um vão vazio no fim). */
 .pinned .track {
-  padding: 0 var(--space-lg) 0 var(--space-md);
+  padding: 0;
   width: max-content;
+  align-items: center;
 }
 
 /* Cabeçalho da cena */
@@ -124,9 +158,17 @@
   will-change: transform;
 }
 
+/* Slot: contêiner de cada card no trilho. Por padrão (carrossel/single) é
+   transparente e apenas repassa a largura ao card. No modo pin ele vira o
+   "passo" do percurso (1 tela de largura) e centraliza o card estreito. */
+.slot {
+  flex: 0 0 clamp(300px, 42vw, 460px);
+  display: flex;
+}
+
 /* Card — retangular (tamanho normal) */
 .card {
-  flex: 0 0 clamp(300px, 42vw, 460px);
+  width: 100%;
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
   background: var(--bg-elevated);
@@ -138,6 +180,63 @@
 
 .card:hover {
   border-color: var(--border);
+}
+
+/* ===========================================================
+   CARD HORIZONTAL no modo pin: imagem à esquerda, conteúdo à
+   direita. Um card por vez; o SLOT ocupa a largura do viewport
+   (mantém o passo do cinema e evita vão no fim), e o CARD é mais
+   estreito e centralizado dentro do slot — ficando mais alto em
+   relação à largura ("retrato"). A descrição longa cabe inteira.
+   =========================================================== */
+.pinned .slot {
+  /* Cada slot é um "passo" de 1 tela (mantém o percurso cinema sem vão).
+     O card fica centralizado dentro do slot. */
+  flex: 0 0 var(--card-w, 100%);
+  width: var(--card-w, 100%);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card horizontal, largo o bastante para a descrição caber em poucas linhas,
+   e com altura limitada ao espaço disponível. Largura e altura em clamp para
+   adaptar à tela sem precisar de scroll interno. */
+.pinned .card {
+  width: min(92%, 920px);
+  height: auto;
+  /* Limita à altura do viewport (espaço entre header e barra), evitando que
+     a descrição longa estoure para fora. */
+  max-height: 100%;
+  flex-direction: row;
+}
+
+/* Imagem: painel lateral à esquerda (~42%), altura total do card. */
+.pinned .poster {
+  flex: 0 0 42%;
+  aspect-ratio: auto;
+  height: auto;
+  align-self: stretch;
+  min-height: 0;
+}
+
+/* Conteúdo à direita: centrado verticalmente, sem scroll interno. */
+.pinned .cardBody {
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: clamp(var(--space-xs), 1.4vh, var(--space-sm));
+  padding: clamp(var(--space-sm), 3vh, var(--space-md))
+    clamp(var(--space-md), 3vw, var(--space-lg));
+  min-height: 0;
+}
+
+/* Tipografia do card no pin: responsiva à altura para caber sem corte. */
+.pinned .cardTitle {
+  font-size: clamp(1.3rem, 2.6vh, 1.8rem);
+}
+
+.pinned .cardDesc {
+  font-size: clamp(0.82rem, 1.7vh, 0.98rem);
+  line-height: 1.5;
 }
 
 .poster {
@@ -267,7 +366,7 @@
   display: none;
 }
 
-.projects:not(.pinned) .card {
+.projects:not(.pinned) .slot {
   flex-basis: clamp(260px, 80vw, 340px);
   scroll-snap-align: start;
 }
@@ -284,11 +383,41 @@
   justify-content: center;
 }
 
-.single .card {
+.single .slot {
   flex: 0 0 clamp(300px, 90vw, 560px);
 }
 
 /* Com um só projeto, a navegação por setas não se aplica. */
 .single .controls {
   display: none;
+}
+
+/* ===========================================================
+   MODO PIN em telas de POUCA ALTURA (laptops): compacta o
+   cabeçalho progressivamente para o card caber inteiro e
+   centralizado. O card em si já se adapta via clamp/max-height.
+   =========================================================== */
+@media (min-width: 981px) and (max-height: 820px) {
+  .pinned .title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+  }
+
+  .pinned .sceneLabel {
+    font-size: 0.68rem;
+  }
+
+  .pinned .stage {
+    padding-top: calc(var(--nav-height) + var(--space-xs));
+    padding-bottom: var(--space-sm);
+  }
+}
+
+@media (min-width: 981px) and (max-height: 680px) {
+  .pinned .sceneLabel {
+    display: none;
+  }
+
+  .pinned .title {
+    font-size: 1.5rem;
+  }
 }

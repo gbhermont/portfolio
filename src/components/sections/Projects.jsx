@@ -73,6 +73,7 @@ function Projects() {
 
     if (!isPinned) {
       track.style.transform = "";
+      track.style.removeProperty("--card-w");
       setProgress(0);
       return undefined;
     }
@@ -80,13 +81,18 @@ function Projects() {
     let frame = null;
     const update = () => {
       frame = null;
+      const viewport = track.parentElement;
+
+      // Cada card ocupa exatamente a largura visível do viewport (1 por vez,
+      // layout horizontal). Definir via JS evita ambiguidade do flex-basis em
+      // % dentro de um trilho "max-content". A variável é lida pelo CSS.
+      track.style.setProperty("--card-w", `${viewport.clientWidth}px`);
+
       const scrollable = section.offsetHeight - window.innerHeight;
       const passed = Math.min(Math.max(-section.getBoundingClientRect().top, 0), scrollable);
       const ratio = scrollable > 0 ? passed / scrollable : 0;
       // Distância = o quanto o trilho (largura real do conteúdo) excede a área
-      // visível (o viewport que o contém). scrollWidth inclui o padding, então
-      // o último card chega por completo ao fim do percurso.
-      const viewport = track.parentElement;
+      // visível (o viewport que o contém).
       const distance = track.scrollWidth - viewport.clientWidth;
       track.style.transform = `translateX(${-ratio * Math.max(0, distance)}px)`;
       setProgress(ratio);
@@ -150,8 +156,8 @@ function Projects() {
         <div className={styles.viewport}>
           <div className={styles.track} ref={trackRef}>
             {PROJECTS.map((project, index) => (
+              <div key={project.num} className={styles.slot}>
               <article
-                key={project.num}
                 className={`${styles.card} ${isPinned ? "" : "revealItem"}`}
                 style={{ "--i": index + 1 }}
               >
@@ -191,6 +197,7 @@ function Projects() {
                   </a>
                 </div>
               </article>
+              </div>
             ))}
           </div>
         </div>
